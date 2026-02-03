@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🔍 Verify Medicine</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            width: 80%;
+            max-width: 700px;
+            min-width: 450px;
+            padding: 50px 60px;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+            text-align: center;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 32px;
+            margin-bottom: 25px;
+        }
+
+        p.instruction {
+            color: #555;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        form {
+            background: #f7f9fb;
+            padding: 35px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        input {
+            padding: 14px;
+            width: 70%;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 14px 22px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #2471a3;
+        }
+
+        .error {
+            color: #c0392b;
+            font-weight: bold;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #2980b9;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔍 Verify Medicine</h2>
+        <p class="instruction">Enter the QR hash below or scan it using your device.</p>
+
+        <!-- Fixed: input name must match views.py -->
+        <form method="post" action="{% url 'verify_medicine' %}">
+            {% csrf_token %}
+            <input type="text" name="tx_hash" placeholder="Enter or scan QR hash" required>
+            <button type="submit">Verify</button>
+        </form>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

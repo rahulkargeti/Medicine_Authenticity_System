@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medicine Added</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f0f4f8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: #ffffff;
+            width: 70%;
+            max-width: 700px;
+            min-width: 420px;
+            padding: 40px 45px;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+            text-align: center;
+        }
+
+        h2 {
+            color: #27ae60;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+
+        .result {
+            background: #ecf0f1;
+            padding: 30px;
+            border-radius: 14px;
+            margin-top: 20px;
+        }
+
+        .hash {
+            font-family: monospace;
+            font-size: 16px;
+            word-break: break-word;
+            line-height: 1.6;
+            margin: 12px 0 20px;
+        }
+
+        img {
+            max-width: 260px;
+            margin-top: 15px;
+        }
+
+        .links {
+            margin-top: 30px;
+        }
+
+        .links a {
+            display: inline-block;
+            margin: 0 15px;
+            text-decoration: none;
+            color: #2980b9;
+            font-size: 16px;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>✅ Medicine Registered Successfully</h2>
+
+    <div class="result">
+        <p><strong>Transaction Hash</strong></p>
+        <div class="hash">{{ medicine.tx_hash }}</div>
+
+        <p><strong>QR Code</strong></p>
+        <img src="{{ medicine.qr_code.url }}" alt="Medicine QR Code">
+    </div>
+
+    <div class="links">
+        <a href="/register/">Register another medicine</a>
+        <a href="/verify/">Verify medicine</a>
+    </div>
+</div>
+
+</body>
+</html>
