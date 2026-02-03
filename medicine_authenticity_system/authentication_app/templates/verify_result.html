@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medicine Verification Result</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #eef1f4;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #fff;
+            width: 80%;
+            max-width: 760px;
+            min-width: 520px;
+            padding: 60px 50px;
+            border-radius: 14px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        /* Applied only when medicine NOT found */
+        .compact {
+            min-height: auto;
+            padding-bottom: 40px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 35px;
+            color: #2c3e50;
+            font-size: 32px;
+        }
+
+        .result-card {
+            padding: 40px 30px;
+            border-radius: 12px;
+        }
+
+        .genuine {
+            background: #d4edda;
+            border: 1.5px solid #28a745;
+            color: #155724;
+        }
+
+        .not-found {
+            background: #f8d7da;
+            border: 1.5px solid #dc3545;
+            color: #721c24;
+            text-align: center;
+            font-size: 20px;
+            padding: 40px;
+            border-radius: 12px;
+        }
+
+        .row {
+            display: flex;
+            margin-bottom: 20px;
+            font-size: 19px;
+            align-items: flex-start;
+        }
+
+        .label {
+            width: 180px;
+            font-weight: 700;
+        }
+
+        .value {
+            flex: 1;
+            font-size: 19px;
+            line-height: 1.6;
+            word-break: break-word;
+        }
+
+        .hash {
+            font-family: monospace;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 35px;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .button {
+            display: block;
+            width: fit-content;
+            margin: 45px auto 0;
+            padding: 18px 36px;
+            background: #27ae60;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+{% if medicine %}
+<div class="container">
+{% else %}
+<div class="container compact">
+{% endif %}
+
+    <h2>🔍 Medicine Verification Result</h2>
+
+    {% if medicine %}
+        <div class="result-card genuine">
+
+            <div class="row">
+                <div class="label">Name:</div>
+                <div class="value">{{ medicine.name }}</div>
+            </div>
+
+            <div class="row">
+                <div class="label">Batch:</div>
+                <div class="value">{{ medicine.batch }}</div>
+            </div>
+
+            <div class="row">
+                <div class="label">Manufacturer:</div>
+                <div class="value">{{ medicine.manufacturer }}</div>
+            </div>
+
+            <div class="row">
+                <div class="label">Expiry:</div>
+                <div class="value">{{ medicine.expiry }}</div>
+            </div>
+
+            <div class="row">
+                <div class="label">Transaction Hash:</div>
+                <div class="value hash">{{ medicine.tx_hash }}</div>
+            </div>
+
+            <div class="status">✅ Medicine is Genuine</div>
+
+        </div>
+    {% else %}
+        <div class="result-card not-found">
+            ❌ Medicine not found or invalid ID
+        </div>
+    {% endif %}
+
+    <a href="/verify/" class="button">Verify Another Medicine</a>
+
+</div>
+
+</body>
+</html>
+
